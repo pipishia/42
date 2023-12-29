@@ -11,6 +11,7 @@ public class KlayController : MonoBehaviour
     public KlayInputControl inputControl;
     public Vector2 inputDirection;
     private Rigidbody2D rb;
+    private PhysicsCheck physicsCheck;
     private SpriteRenderer sr;
     [Header("Basic parameter")]
     public float defSpeed;
@@ -24,6 +25,7 @@ public class KlayController : MonoBehaviour
     {
         inputControl = new KlayInputControl();
         rb = GetComponent<Rigidbody2D>();
+        physicsCheck = GetComponent<PhysicsCheck>();
         sr = GetComponent<SpriteRenderer>();
 
         inputControl.Player.Jump.started += Jump;
@@ -67,19 +69,21 @@ public class KlayController : MonoBehaviour
     }
     private void Jump(InputAction.CallbackContext context)
     {
-        
+        if (physicsCheck.isGround || physicsCheck.isWall)
+        {
             Debug.Log("jump pressed");
             rb.AddForce(transform.up * jumpForce, ForceMode2D.Impulse);
-        
+        }
     }
 
     private void Sprint(InputAction.CallbackContext context)
     {
-    
+        if (physicsCheck.isGround)
+        {
             Debug.Log("sprint pressed");
             //speed += (targetSpeed - speed) * sprintRate;
             speed = targetSpeed;
-        
+        }
     }
     private void SprintCanceled(InputAction.CallbackContext context)
     {

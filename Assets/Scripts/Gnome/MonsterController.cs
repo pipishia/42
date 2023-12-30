@@ -5,7 +5,7 @@ using UnityEngine;
 public class MonsterController : MonoBehaviour
 {
     public Transform monTransform;
-    public Transform GnomeTransform;
+    public Transform KlayTransform;
     public Transform playerTransform;
     private int moveDirection;
     public float speed = 3f;
@@ -26,9 +26,9 @@ public class MonsterController : MonoBehaviour
         hp = max_hp;
         monTransform = this.transform;
         originalPosition = transform.position;
-        if (GameObject.Find("Gnome") != null)
+        if (GameObject.Find("Klay") != null)
         {
-            GnomeTransform = GameObject.Find("Gnome").transform;
+            KlayTransform = GameObject.Find("Klay").transform;
         }
         if (GameObject.Find("player") != null)
         {
@@ -45,7 +45,7 @@ public class MonsterController : MonoBehaviour
         float _percent = (hp / max_hp);
         monHP.transform.localScale = new Vector3(_percent, monHP.transform.localScale.y, monHP.transform.localScale.z);
 
-        float distanceToPlayer1 = Vector2.Distance(monTransform.position, GnomeTransform.position);
+        float distanceToPlayer1 = Vector2.Distance(monTransform.position, KlayTransform.position);
         float distanceToPlayer2 = Vector2.Distance(monTransform.position, playerTransform.position);
 
         if (distanceToPlayer1 <= detectionRange1)
@@ -86,12 +86,12 @@ public class MonsterController : MonoBehaviour
         if (isChasing1)
         {
             // 根據面朝方向設定速度
-            if (GnomeTransform.position.x - monTransform.position.x >= 0.3)
+            if (KlayTransform.position.x - monTransform.position.x >= 0.3)
             {
                 moveDirection = 1;
                 GetComponent<SpriteRenderer>().flipX = false;
             }
-            else if (GnomeTransform.position.x - monTransform.position.x <= -0.3)
+            else if (KlayTransform.position.x - monTransform.position.x <= -0.3)
             {
                 moveDirection = -1;
                 GetComponent<SpriteRenderer>().flipX = true;

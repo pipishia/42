@@ -19,8 +19,14 @@ public class KlayController : MonoBehaviour
     public float targetSpeed;
     public float sprintRate;
     public float jumpForce;
+    public GameObject playerHP;//梁家祥加HP
+    float hp = 10f;
+    public float max_hp;
 
-
+    void Start()
+    {
+        hp = max_hp;
+    }
     private void Awake()
     {
         inputControl = new KlayInputControl();
@@ -43,9 +49,15 @@ public class KlayController : MonoBehaviour
         inputControl.Disable();
     }
 
-    private void Update()
+    void Update()
     {
         inputDirection = inputControl.Player.Move.ReadValue<Vector2>();
+        if (hp <= 0)
+        {
+            Destroy(gameObject);
+        }
+        float _percent = (hp / max_hp);
+        playerHP.transform.localScale = new Vector3(_percent, playerHP.transform.localScale.y, playerHP.transform.localScale.z);
     }
 
     private void FixedUpdate()
@@ -88,6 +100,15 @@ public class KlayController : MonoBehaviour
     private void SprintCanceled(InputAction.CallbackContext context)
     {
         speed = defSpeed;
+    }
+    private void OnTriggerEnter2D(Collider2D other) {
+        
+  
+        if (other.gameObject.tag == "scratch")
+        {
+            hp -= 1;
+            print("scratch");
+        }
     }
 
 }

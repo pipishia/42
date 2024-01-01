@@ -64576,7 +64576,6 @@ GameObject:
   - component: {fileID: 1177100873}
   - component: {fileID: 1177100872}
   - component: {fileID: 1177100875}
-  - component: {fileID: 1177100876}
   - component: {fileID: 1177100877}
   - component: {fileID: 1177100878}
   - component: {fileID: 1177100880}
@@ -64685,23 +64684,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
---- !u!114 &1177100876
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1177100871}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e67fd1d776d8c4745b50db09f3e23d27, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  movespeed: 7
-  jumpforce: 14
-  jumpableGround:
-    serializedVersion: 2
-    m_Bits: 64
 --- !u!114 &1177100877
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -64732,10 +64714,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bb492e99551ea340aae437676b1eef0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  switchPlayer: {fileID: 696326099}
   inputDirection: {x: 0, y: 0}
-  defSpeed: 200
   speed: 400
-  defJumpForce: 410
   jumpForce: 410
   playerHP: {fileID: 653681439}
   max_hp: 10

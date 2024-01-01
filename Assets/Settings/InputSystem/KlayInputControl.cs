@@ -189,7 +189,7 @@ public partial class @KlayInputControl: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""13ab108b-2f51-439d-a695-3b8695e76150"",
-                    ""path"": ""<Keyboard>/leftShift"",
+                    ""path"": ""<Keyboard>/x"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",

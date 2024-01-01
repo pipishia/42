@@ -8,7 +8,8 @@ using UnityEngine.PlayerLoop;
 
 public class BennoController : MonoBehaviour
 {
-    [SerializeField] GameObject switchPlayer;   
+    public GameObject cameraManager;
+    public GameObject switchPlayer;   
     public BennoInputControl inputControl;
     public Vector2 inputDirection;
     private Rigidbody2D rb;
@@ -17,7 +18,7 @@ public class BennoController : MonoBehaviour
     [Header("Basic parameter")]
     public float speed;
     public float jumpForce;
-    public GameObject playerHP;//梁家祥加HP
+    public GameObject playerHP;//Kevin Add HP
     float hp = 10f;
     public float max_hp;
 
@@ -87,16 +88,17 @@ public class BennoController : MonoBehaviour
         }
     }
 
-   private void Switch(InputAction.CallbackContext context)
+   public void Switch(InputAction.CallbackContext context)
     {
         //switchPlayer.SetActive(true);
         //new KlayInputControl input = switchPlayer.GetComponents<KlayInputControl>();
-        
-
-       
+        print("Benno Switch");
+        switchPlayer.GetComponent<KlayController>().inputControl.Enable();
+        gameObject.SetActive(false);     
+        cameraManager.GetComponent<CameraController>().SwitchToklay();   
     }
     private void OnTriggerEnter2D(Collider2D other) {
-        if (other.gameObject.tag == "scratch")
+        if (other.gameObject.CompareTag("scratch"))
         {
             hp -= 1;
             print("scratch");

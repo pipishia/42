@@ -178,7 +178,7 @@ public partial class @BennoInputControl: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""cedfc73f-46c8-4bc9-8bee-a7d1692f41be"",
-                    ""path"": ""<Keyboard>/leftShift"",
+                    ""path"": ""<Keyboard>/x"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",

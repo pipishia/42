@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Beams : MonoBehaviour
 {
-    [SerializeField] private float speed;
+    public float speed;
     private Rigidbody2D rb;
     void Start()
     {

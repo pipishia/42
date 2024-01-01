@@ -8,7 +8,8 @@ using UnityEngine.PlayerLoop;
 
 public class KlayController : MonoBehaviour
 {
-    [SerializeField] GameObject switchPlayer;
+    public GameObject cameraManager;
+    public GameObject switchPlayer;
     private Vector2 nowPos;
     public KlayInputControl inputControl;
     public Vector2 inputDirection;
@@ -97,11 +98,14 @@ public class KlayController : MonoBehaviour
         nowPos = rb.position;
         switchPlayer.transform.position = (Vector3)nowPos;
         switchPlayer.SetActive(true);
+        
         inputControl.Disable();
+        cameraManager.GetComponent<CameraController>().SwitchToBenno();
+        
     }
 
     private void OnTriggerEnter2D(Collider2D other) {
-        if (other.gameObject.tag == "scratch")
+        if (other.gameObject.CompareTag("scratch"))
         {
             hp -= 1;
             print("scratch");

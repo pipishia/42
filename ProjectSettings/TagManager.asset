@@ -7,6 +7,8 @@ TagManager:
   - scratch
   - hit
   - monster
+  - Beam
+  - Firepoint
   layers:
   - Default
   - TransparentFX

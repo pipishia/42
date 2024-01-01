@@ -6,20 +6,16 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.PlayerLoop;
 
-public class KlayController : MonoBehaviour
+public class BennoController : MonoBehaviour
 {
-    [SerializeField] GameObject switchPlayer;
-    private Vector2 nowPos;
-    public KlayInputControl inputControl;
+    [SerializeField] GameObject switchPlayer;   
+    public BennoInputControl inputControl;
     public Vector2 inputDirection;
     private Rigidbody2D rb;
     private PhysicsCheck physicsCheck;
     private SpriteRenderer sr;
     [Header("Basic parameter")]
-    //public float defSpeed;
     public float speed;
-    //public float defJumpForce;
- 
     public float jumpForce;
     public GameObject playerHP;//梁家祥加HP
     float hp = 10f;
@@ -28,11 +24,10 @@ public class KlayController : MonoBehaviour
     void Start()
     {
         hp = max_hp;
-        switchPlayer.SetActive(false);
     }
     private void Awake()
     {
-        inputControl = new KlayInputControl();
+        inputControl = new BennoInputControl();
         rb = GetComponent<Rigidbody2D>();
         physicsCheck = GetComponent<PhysicsCheck>();
         sr = GetComponent<SpriteRenderer>();
@@ -92,14 +87,14 @@ public class KlayController : MonoBehaviour
         }
     }
 
-    private void Switch(InputAction.CallbackContext context)
+   private void Switch(InputAction.CallbackContext context)
     {
-        nowPos = rb.position;
-        switchPlayer.transform.position = (Vector3)nowPos;
-        switchPlayer.SetActive(true);
-        inputControl.Disable();
-    }
+        //switchPlayer.SetActive(true);
+        //new KlayInputControl input = switchPlayer.GetComponents<KlayInputControl>();
+        
 
+       
+    }
     private void OnTriggerEnter2D(Collider2D other) {
         if (other.gameObject.tag == "scratch")
         {
@@ -107,5 +102,4 @@ public class KlayController : MonoBehaviour
             print("scratch");
         }
     }
-
 }

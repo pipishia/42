@@ -10,8 +10,13 @@ public class Beams : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        rb.velocity = transform.right * speed * -1;
-       
+        //rb.velocity = -1 * speed * transform.right;
+        rb.velocity = speed * transform.right;
+
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision){
+        Destroy(gameObject);
     }
 
 }

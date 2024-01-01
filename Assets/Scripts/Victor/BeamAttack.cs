@@ -1,17 +1,39 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class BeamAttack : MonoBehaviour
 {
   public Transform Firepoint;
   public GameObject beamPrefab;
-  public Rigidbody2D rb;
+  //public Rigidbody2D rb;
+  public BennoInputControl inputControl;
   public GameObject player;
   private GameObject beam;
   public float next_spawn_time;
-  private float spawnTimer;
-  public bool canShoot;
+  [SerializeField] private float spawnTimer;
+  //public bool canShoot;
+
+  private void Awake()
+  {
+    inputControl = new BennoInputControl();
+
+    inputControl.Player.Shoot.performed += Shoot;
+
+  }
+
+  private void OnEnable()
+  {
+    inputControl.Enable();
+  }
+
+  private void OnDisable()
+  {
+    inputControl.Disable();
+  }
 
   void Start()
   {
@@ -19,32 +41,36 @@ public class BeamAttack : MonoBehaviour
     spawnTimer = next_spawn_time;
   }
 
-  void Update()
+  void FixedUpdate()
   {
     spawnTimer -= Time.deltaTime;
-    if (spawnTimer <= 0 )
-    {
-      Shoot();
-      spawnTimer = next_spawn_time;
-    }
   }
-  void Shoot()
-  {
-    if (Input.GetKey(KeyCode.Q))
-    {
-      if (player.GetComponent<Transform>().rotation.y < 0)
-      {
-        beam = Instantiate(beamPrefab, Firepoint.position, Firepoint.rotation);
-        Debug.Log("You're looking Left");
-        Destroy(beam, 1.0f);
-      }
 
-      else if (player.GetComponent<Transform>().rotation.y == 0)
+  private void Shoot(InputAction.CallbackContext context)
+  {
+    //print("shoot pressed");
+    if (spawnTimer <= 0)
+    {
+      //print("shoot!");
+
+      if (player.GetComponent<SpriteRenderer>().flipX)
       {
+        Firepoint.Rotate(new Vector3(0, 180, 0));
         beam = Instantiate(beamPrefab, Firepoint.position, Firepoint.rotation);
-        Debug.Log("You're looking Right");
-        Destroy(beam, 1.0f);
+        print("Benno looking Left");
+        Firepoint.Rotate(new Vector3(0, -180, 0));
+        //Destroy(beam, 1.0f);
       }
+      else
+      {
+        
+        beam = Instantiate(beamPrefab, Firepoint.position, Firepoint.rotation);
+        print("Benno looking Right");
+        
+        //Destroy(beam, 1.0f);
+        
+      }
+      spawnTimer = next_spawn_time;
     }
   }
 }

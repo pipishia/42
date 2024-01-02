@@ -6,13 +6,15 @@ public class KlayAnimation : MonoBehaviour
 {
     private Animator anim;
     private Rigidbody2D rb;
-    //private PhysicsCheck physicsCheck;
+    private PhysicsCheck physicsCheck;
+    private KlayController klayController;
 
     private void Awake()
     {
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
-        //physicsCheck = GetComponent<PhysicsCheck>();
+        physicsCheck = GetComponent<PhysicsCheck>();
+        klayController = GetComponent<KlayController>();
     }
 
     private void Update()
@@ -24,6 +26,8 @@ public class KlayAnimation : MonoBehaviour
     {
         anim.SetFloat("velocityX",Mathf.Abs(rb.velocity.x));
         anim.SetFloat("velocityY",rb.velocity.y);
-        //anim.SetBool("isGround",physicsCheck.isGround);
+        anim.SetBool("isGround",physicsCheck.isGround);
+        anim.SetBool("isWall",physicsCheck.isWall);
+        anim.SetBool("isDie",klayController.isDie);
     }
 }

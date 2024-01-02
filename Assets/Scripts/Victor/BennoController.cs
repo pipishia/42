@@ -83,7 +83,7 @@ public class BennoController : MonoBehaviour
     {
         if (physicsCheck.isGround || physicsCheck.isWall)
         {
-            print("jump pressed");
+            //print("jump pressed");
             rb.AddForce(transform.up * jumpForce, ForceMode2D.Impulse);
         }
     }

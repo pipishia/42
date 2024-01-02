@@ -101,7 +101,7 @@ public class KlayController : MonoBehaviour
         {
             if (physicsCheck.isGround || physicsCheck.isWall)
             {
-                Debug.Log("jump pressed");
+                //Debug.Log("jump pressed");
                 rb.AddForce(transform.up * jumpForce, ForceMode2D.Impulse);
                 jumpTimer = jumpCD;
             }

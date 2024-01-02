@@ -12,7 +12,7 @@ public class BennoAnimation : MonoBehaviour
     {
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
-        physicsCheck = GetComponent<PhysicsCheck>();
+        //physicsCheck = GetComponent<PhysicsCheck>();
     }
 
     private void Update()
@@ -24,6 +24,6 @@ public class BennoAnimation : MonoBehaviour
     {
         anim.SetFloat("velocityX", Mathf.Abs(rb.velocity.x));
         anim.SetFloat("velocityY", rb.velocity.y);
-        anim.SetBool("isGround",physicsCheck.isGround);
+        //anim.SetBool("isGround",physicsCheck.isGround);
     }
 }

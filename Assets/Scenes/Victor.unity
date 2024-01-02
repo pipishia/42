@@ -64909,7 +64909,7 @@ MonoBehaviour:
   speed: 600
   jumpForce: 410
   playerHP: {fileID: 653681439}
-  max_hp: 10
+  max_hp: 5
 --- !u!70 &1177100879
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -64922,7 +64922,7 @@ CapsuleCollider2D:
   m_Material: {fileID: 6200000, guid: 0d7942c32fa996447a7b0323a4e29655, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0

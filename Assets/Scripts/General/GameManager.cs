@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -54,5 +55,9 @@ public class GameManager : MonoBehaviour
     {
         yield return new WaitForSeconds(2.0f);
         DiePause();
+    }
+    public void GameStart(){
+        print("game start");
+        SceneManager.LoadScene("FinalScene");
     }
 }

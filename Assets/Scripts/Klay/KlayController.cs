@@ -32,6 +32,7 @@ public class KlayController : MonoBehaviour
     public bool isAttack;
     public float attackTimer;
     public float attackCD;
+    public bool isSwitch;
 
     public int potionHeal;
     public GameObject Potion;
@@ -137,7 +138,7 @@ public class KlayController : MonoBehaviour
         nowPos = rb.position;
         switchPlayer.transform.position = (Vector3)nowPos;
         switchPlayer.SetActive(true);
-
+        isSwitch = true;
         inputControl.Disable();
         cameraManager.GetComponent<CameraController>().SwitchToBenno();
         if (switchaudio != null)
@@ -162,7 +163,6 @@ public class KlayController : MonoBehaviour
         if (hp <= 0)
         {
             KlayIsDead();
-            
         }
     }
 

@@ -94,7 +94,8 @@ public class BennoController : MonoBehaviour
         //new KlayInputControl input = switchPlayer.GetComponents<KlayInputControl>();
         print("Benno Switch");
         switchPlayer.GetComponent<KlayController>().inputControl.Enable();
-        gameObject.SetActive(false);     
+        gameObject.SetActive(false);
+        switchPlayer.GetComponent<KlayController>().isSwitch = false;
         cameraManager.GetComponent<CameraController>().SwitchToklay();   
     }
     private void OnTriggerEnter2D(Collider2D other) {

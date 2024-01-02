@@ -18,7 +18,7 @@ public class TitleSceneController : MonoBehaviour
     }
     public void GameStart(){
         print("game start");
-        SceneManager.LoadScene("SampleScene");
+        SceneManager.LoadScene("FinalScene");
 
     }
 }

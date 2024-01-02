@@ -59319,7 +59319,10 @@ MonoBehaviour:
   attackCooldown: 0.07
   monAnimator: {fileID: 186741944}
   monHP: {fileID: 822507538}
-  max_hp: 100
+  Klay: {fileID: 696326099}
+  hp: 0
+  max_hp: 10
+  takeDamageAmount: 1
 --- !u!95 &186741944
 Animator:
   serializedVersion: 5
@@ -59370,7 +59373,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: -0.04180193, y: 3.2638094}
@@ -59447,7 +59450,7 @@ Transform:
   m_GameObject: {fileID: 186741940}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 55.7, y: 13.6, z: 0}
+  m_LocalPosition: {x: 17.5, y: -1.55, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -60317,7 +60320,10 @@ MonoBehaviour:
   attackCooldown: 0.07
   monAnimator: {fileID: 347666963}
   monHP: {fileID: 1408618050}
-  max_hp: 100
+  Klay: {fileID: 696326099}
+  hp: 0
+  max_hp: 20
+  takeDamageAmount: 2
 --- !u!95 &347666963
 Animator:
   serializedVersion: 5
@@ -63236,9 +63242,14 @@ MonoBehaviour:
   inputDirection: {x: 0, y: 0}
   speed: 700
   jumpForce: 410
+  jumpCD: 0.4
+  jumpTimer: 0
   playerHP: {fileID: 835896230}
-  hp: 10
+  hp: 5
   max_hp: 10
+  takeDamageAmount: 1
+  isDie: 0
+  potionHeal: 3
   Potion: {fileID: 2035760924}
 --- !u!70 &696326106
 CapsuleCollider2D:
@@ -64988,6 +64999,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f74969878cc28a4589a56ac8b09decd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  physicsCheck: {fileID: 0}
 --- !u!1 &1199676283
 GameObject:
   m_ObjectHideFlags: 0
@@ -66552,7 +66564,7 @@ GameObject:
   - component: {fileID: 1568879049}
   m_Layer: 0
   m_Name: Attack
-  m_TagString: monattack
+  m_TagString: scratch
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -66601,7 +66613,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 1.2157317, y: 2.616936}

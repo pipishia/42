@@ -19,12 +19,13 @@ public class BennoController : MonoBehaviour
     public float speed;
     public float jumpForce;
     public GameObject playerHP;//Kevin Add HP
-    float hp = 10f;
+    public float hp = 10f;
     public float max_hp;
 
     void Start()
     {
         hp = max_hp;
+        
     }
     private void Awake()
     {
@@ -51,12 +52,7 @@ public class BennoController : MonoBehaviour
     void Update()
     {
         inputDirection = inputControl.Player.Move.ReadValue<Vector2>();
-        if (hp <= 0)
-        {
-            //Destroy(gameObject);
-            
-        }
-        float _percent = (hp / max_hp);
+        float _percent = hp / max_hp;
         playerHP.transform.localScale = new Vector3(_percent, playerHP.transform.localScale.y, playerHP.transform.localScale.z);
     }
 
@@ -98,11 +94,20 @@ public class BennoController : MonoBehaviour
         switchPlayer.GetComponent<KlayController>().isSwitch = false;
         cameraManager.GetComponent<CameraController>().SwitchToklay();   
     }
+
+    private void BennoIsDead(){
+        inputControl.Disable();
+        playerHP.SetActive(false);
+    }
     private void OnTriggerEnter2D(Collider2D other) {
         if (other.gameObject.CompareTag("scratch"))
         {
             hp -= 1;
             print("scratch");
+        }
+        if (hp <= 0)
+        {
+            BennoIsDead();
         }
     }
 }

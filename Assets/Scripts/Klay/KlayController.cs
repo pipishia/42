@@ -50,9 +50,12 @@ public class KlayController : MonoBehaviour
         hp = max_hp;
         jumpTimer = jumpCD;
         attackTimer = attackCD;
-        switchPlayer.SetActive(false);
+        //switchPlayer.SetActive(false);
         isDie = false;
         myAudioSource= GetComponent<AudioSource>();
+        inputControl.Disable();
+        
+        
     }
     private void Awake()
     {

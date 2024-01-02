@@ -6,11 +6,13 @@ public class GateController : MonoBehaviour
     private Animator animator;
     public GameObject Gate;
     public AudioClip passaudio;
+     private AudioSource myAudioSource;
 
     void Start()
     {
         // 获取Animator组件
         animator = GetComponent<Animator>();
+        myAudioSource= GetComponent<AudioSource>();
     }
     void OnCollisionEnter2D(Collision2D other)
     {
@@ -19,8 +21,12 @@ public class GateController : MonoBehaviour
             animator.SetInteger("close", 1);
 
             StartCoroutine(WaitForAnimation());
-             if (passaudio != null)
-            Instantiate (passaudio, Vector2.zero, Quaternion.identity);
+                     if (myAudioSource == null)
+        {
+            myAudioSource = gameObject.AddComponent<AudioSource>();
+        }
+        myAudioSource.clip = passaudio;
+        myAudioSource.Play();
         }
     }
     IEnumerator WaitForAnimation()

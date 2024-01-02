@@ -37,11 +37,12 @@ public class KlayController : MonoBehaviour
     public int potionHeal;
     public GameObject Potion;
     public AudioClip switchaudio=null;
-    public AudioClip jumpaudio=null;
+    public AudioClip jumpaudio;
     public AudioClip deadaudio=null;
     public AudioClip pickupaudio=null;
     public AudioClip hurtaudio=null;
     public AudioClip hitaudio=null;
+    private AudioSource myAudioSource;
 
 
     void Start()
@@ -51,6 +52,7 @@ public class KlayController : MonoBehaviour
         attackTimer = attackCD;
         switchPlayer.SetActive(false);
         isDie = false;
+        myAudioSource= GetComponent<AudioSource>();
     }
     private void Awake()
     {
@@ -97,8 +99,12 @@ public class KlayController : MonoBehaviour
         {
             isAttack = true;
             attackTimer = attackCD;
-            if (hitaudio != null)
-            Instantiate (hitaudio, Vector2.zero, Quaternion.identity);
+                  if (myAudioSource == null)
+        {
+            myAudioSource = gameObject.AddComponent<AudioSource>();
+        }
+        myAudioSource.clip = hitaudio;
+        myAudioSource.Play();
         }
     }
     // private void KlayAttackEnd(InputAction.CallbackContext context)
@@ -129,9 +135,14 @@ public class KlayController : MonoBehaviour
                 //Debug.Log("jump pressed");
                 rb.AddForce(transform.up * jumpForce, ForceMode2D.Impulse);
                 jumpTimer = jumpCD;
+               if (myAudioSource == null)
+        {
+            myAudioSource = gameObject.AddComponent<AudioSource>();
+        }
+        myAudioSource.clip = jumpaudio;
+        myAudioSource.Play();
             }
-        if (jumpaudio != null)
-        Instantiate (jumpaudio, Vector2.zero, Quaternion.identity);
+             
         }
         
     }
@@ -144,8 +155,12 @@ public class KlayController : MonoBehaviour
         isSwitch = true;
         inputControl.Disable();
         cameraManager.GetComponent<CameraController>().SwitchToBenno();
-        if (switchaudio != null)
-        Instantiate (switchaudio, Vector2.zero, Quaternion.identity);
+              if (myAudioSource == null)
+        {
+            myAudioSource = gameObject.AddComponent<AudioSource>();
+        }
+        myAudioSource.clip = switchaudio;
+        myAudioSource.Play();
 
     }  
 
@@ -154,15 +169,23 @@ public class KlayController : MonoBehaviour
         inputControl.Disable();
         playerHP.SetActive(false);
         isDie = true;
-         if (deadaudio != null)
-        Instantiate (deadaudio, Vector2.zero, Quaternion.identity);
+               if (myAudioSource == null)
+        {
+            myAudioSource = gameObject.AddComponent<AudioSource>();
+        }
+        myAudioSource.clip = deadaudio;
+        myAudioSource.Play();
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("scratch"))
             hp -= takeDamageAmount;
-            if (hurtaudio != null)
-            Instantiate (hurtaudio, Vector2.zero, Quaternion.identity);
+                  if (myAudioSource == null)
+        {
+            myAudioSource = gameObject.AddComponent<AudioSource>();
+        }
+        myAudioSource.clip = hurtaudio;
+        myAudioSource.Play();
         if (hp <= 0)
         {
             KlayIsDead();
@@ -178,8 +201,12 @@ public class KlayController : MonoBehaviour
             if (hp >= max_hp)
                 hp = max_hp;
             Destroy(Potion);
-            if (pickupaudio != null)
-            Instantiate (pickupaudio, Vector2.zero, Quaternion.identity);
+                if (myAudioSource == null)
+        {
+            myAudioSource = gameObject.AddComponent<AudioSource>();
+        }
+        myAudioSource.clip = pickupaudio;
+        myAudioSource.Play();
         }
 
     }

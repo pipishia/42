@@ -23,6 +23,8 @@ public class MonsterController : MonoBehaviour
     public float max_hp;
     public float takeDamageAmount;
     public AudioClip gnomediedaudio=null;
+    private AudioSource myAudioSource;
+
 
 
     void Start()
@@ -38,14 +40,20 @@ public class MonsterController : MonoBehaviour
         {
             playerTransform = GameObject.Find("player").transform;
         }
+        myAudioSource= GetComponent<AudioSource>();
+    
     }
 
     void Update()
     {
         if (hp <= 0  || Klay.GetComponent<KlayController>().isDie )
         {
-            if (gnomediedaudio != null)
-            Instantiate (gnomediedaudio, Vector2.zero, Quaternion.identity);
+                  if (myAudioSource == null)
+        {
+            myAudioSource = gameObject.AddComponent<AudioSource>();
+        }
+        myAudioSource.clip = gnomediedaudio;
+        myAudioSource.Play();
             Destroy(gameObject);
             
         }

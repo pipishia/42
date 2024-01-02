@@ -6,7 +6,8 @@ TagManager:
   tags:
   - scratch
   - hit
-  - monster
+  - monattack
+  - potion
   layers:
   - Default
   - TransparentFX

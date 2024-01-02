@@ -87,7 +87,7 @@ public class MonsterController : MonoBehaviour
             }
             AttackPlayer();
 
-            transform.Translate(Vector3.right * moveDirection * speed * Time.deltaTime);// 移動怪物
+            transform.Translate(moveDirection * speed * Time.deltaTime * Vector3.right);// 移動怪物
         }
         else if (isChasing2)
         {
@@ -108,7 +108,7 @@ public class MonsterController : MonoBehaviour
                 GetComponent<SpriteRenderer>().flipX = false;
             }
             AttackPlayer();
-            transform.Translate(Vector3.right * moveDirection * speed * Time.deltaTime);// 移動怪物
+            transform.Translate(moveDirection * speed * Time.deltaTime * Vector3.right);// 移動怪物
         }
         else
         {
@@ -144,7 +144,7 @@ public class MonsterController : MonoBehaviour
             monAnimator.SetInteger("Chase", 0);
         }
     }
-    void OnCollisionEnter2D(Collision2D other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("hit"))
         {

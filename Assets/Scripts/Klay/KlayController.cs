@@ -22,16 +22,28 @@ public class KlayController : MonoBehaviour
     //public float defJumpForce;
 
     public float jumpForce;
-    public GameObject playerHP;//梁家祥加HP
+    public float jumpCD;
+    [SerializeField] private float jumpTimer;
+    public GameObject playerHP;//Kevin Add HP
     public float hp;
     public float max_hp;
+    public int takeDamageAmount;
+    public bool isDie;
+    public bool isAttack;
+    public float attackTimer;
+    public float attackCD;
+
+    public int potionHeal;
     public GameObject Potion;
 
 
     void Start()
     {
         hp = max_hp;
+        jumpTimer = jumpCD;
+        attackTimer = attackCD;
         switchPlayer.SetActive(false);
+        isDie = false;
     }
     private void Awake()
     {
@@ -42,9 +54,12 @@ public class KlayController : MonoBehaviour
 
         inputControl.Player.Jump.started += Jump;
         inputControl.Player.Switch.started += Switch;
+        inputControl.Player.Attack.started += KlayAttack;
+        //nputControl.Player.Attack.canceled += KlayAttackEnd;
 
     }
 
+    
     private void OnEnable()
     {
         inputControl.Enable();
@@ -58,19 +73,29 @@ public class KlayController : MonoBehaviour
     void Update()
     {
         inputDirection = inputControl.Player.Move.ReadValue<Vector2>();
-        if (hp <= 0)
-        {
-            //Destroy(gameObject);
-
-        }
-        float _percent = (hp / max_hp);
+        float _percent = hp / max_hp;
         playerHP.transform.localScale = new Vector3(_percent, playerHP.transform.localScale.y, playerHP.transform.localScale.z);
     }
 
     private void FixedUpdate()
     {
         Move();
+        jumpTimer -= Time.deltaTime;
+        attackTimer -= Time.deltaTime;
     }
+    private void KlayAttack(InputAction.CallbackContext context)
+    {
+
+        if (attackTimer <= 0)
+        {
+            isAttack = true;
+            attackTimer = attackCD;
+        }
+    }
+    // private void KlayAttackEnd(InputAction.CallbackContext context)
+    // {
+    //     isAttack = false;
+    // }
 
     private void Move()
     {
@@ -88,10 +113,14 @@ public class KlayController : MonoBehaviour
     }
     private void Jump(InputAction.CallbackContext context)
     {
-        if (physicsCheck.isGround || physicsCheck.isWall)
+        if (jumpTimer <= 0)
         {
-            Debug.Log("jump pressed");
-            rb.AddForce(transform.up * jumpForce, ForceMode2D.Impulse);
+            if (physicsCheck.isGround || physicsCheck.isWall)
+            {
+                //Debug.Log("jump pressed");
+                rb.AddForce(transform.up * jumpForce, ForceMode2D.Impulse);
+                jumpTimer = jumpCD;
+            }
         }
     }
 
@@ -106,32 +135,34 @@ public class KlayController : MonoBehaviour
 
     }
 
-    void OnCollisionEnter2D(Collision2D other)
+    private void KlayIsDead()
     {
-        if (other.gameObject.tag == "scratch")
+        inputControl.Disable();
+        playerHP.SetActive(false);
+        isDie = true;
+    }
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("scratch"))
+            hp -= takeDamageAmount;
+        if (hp <= 0)
         {
-            hp -= 1;
-        }
-        else if (other.gameObject.tag == "potion")
-        {
-            if (hp == max_hp)
-            {
-                hp += 0;
-            }
-            else if (hp == max_hp - 1)
-            {
-                hp += 1;
-            }
-            else if (hp == max_hp - 2)
-            {
-                hp += 2;
-            }
-            else
-            {
-                hp += 3;
-            }
-            Destroy(Potion);
+            KlayIsDead();
         }
     }
+
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+
+        if (other.gameObject.CompareTag("potion"))
+        {
+            hp += potionHeal;
+            if (hp >= max_hp)
+                hp = max_hp;
+            Destroy(Potion);
+        }
+
+    }
+
 
 }

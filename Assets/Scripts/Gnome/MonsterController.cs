@@ -18,13 +18,15 @@ public class MonsterController : MonoBehaviour
     private float lastAttackTime;
     public Animator monAnimator;
     public GameObject monHP;
-    float hp = 10f;
-    public float max_hp = 0;
+    public GameObject Klay;
+    [SerializeField] private float hp;
+    public float max_hp;
+    public float takeDamageAmount;
 
     void Start()
     {
         hp = max_hp;
-        monTransform = this.transform;
+        monTransform = transform;
         originalPosition = transform.position;
         if (GameObject.Find("Klay") != null)
         {
@@ -38,11 +40,11 @@ public class MonsterController : MonoBehaviour
 
     void Update()
     {
-        if (hp <= 0)
+        if (hp <= 0  || Klay.GetComponent<KlayController>().isDie )
         {
-            Destroy(this.gameObject);
+            Destroy(gameObject);
         }
-        float _percent = (hp / max_hp);
+        float _percent = hp / max_hp;
         monHP.transform.localScale = new Vector3(_percent, monHP.transform.localScale.y, monHP.transform.localScale.z);
 
         float distanceToPlayer1 = Vector2.Distance(monTransform.position, KlayTransform.position);
@@ -84,8 +86,8 @@ public class MonsterController : MonoBehaviour
                 GetComponent<SpriteRenderer>().flipX = false;
             }
             AttackPlayer();
-        
-            transform.Translate(Vector3.right * moveDirection * speed * Time.deltaTime);// 移動怪物
+
+            transform.Translate(moveDirection * speed * Time.deltaTime * Vector3.right);// 移動怪物
         }
         else if (isChasing2)
         {
@@ -106,7 +108,7 @@ public class MonsterController : MonoBehaviour
                 GetComponent<SpriteRenderer>().flipX = false;
             }
             AttackPlayer();
-            transform.Translate(Vector3.right * moveDirection * speed * Time.deltaTime);// 移動怪物
+            transform.Translate(moveDirection * speed * Time.deltaTime * Vector3.right);// 移動怪物
         }
         else
         {
@@ -142,11 +144,11 @@ public class MonsterController : MonoBehaviour
             monAnimator.SetInteger("Chase", 0);
         }
     }
-    void OnCollisionEnter2D(Collision2D other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.tag == "hit")
+        if (other.gameObject.CompareTag("hit"))
         {
-            hp -= 1;
+            hp -= takeDamageAmount;
         }
     }
 }

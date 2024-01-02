@@ -20,11 +20,13 @@ public class KlayController : MonoBehaviour
     //public float defSpeed;
     public float speed;
     //public float defJumpForce;
- 
+
     public float jumpForce;
     public GameObject playerHP;//梁家祥加HP
-    float hp = 10f;
+    public float hp;
     public float max_hp;
+    public GameObject Potion;
+
 
     void Start()
     {
@@ -40,7 +42,7 @@ public class KlayController : MonoBehaviour
 
         inputControl.Player.Jump.started += Jump;
         inputControl.Player.Switch.started += Switch;
- 
+
     }
 
     private void OnEnable()
@@ -59,7 +61,7 @@ public class KlayController : MonoBehaviour
         if (hp <= 0)
         {
             //Destroy(gameObject);
-            
+
         }
         float _percent = (hp / max_hp);
         playerHP.transform.localScale = new Vector3(_percent, playerHP.transform.localScale.y, playerHP.transform.localScale.z);
@@ -98,17 +100,37 @@ public class KlayController : MonoBehaviour
         nowPos = rb.position;
         switchPlayer.transform.position = (Vector3)nowPos;
         switchPlayer.SetActive(true);
-        
+
         inputControl.Disable();
         cameraManager.GetComponent<CameraController>().SwitchToBenno();
-        
+
     }
 
-    private void OnTriggerEnter2D(Collider2D other) {
-        if (other.gameObject.CompareTag("scratch"))
+    void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.tag == "scratch")
         {
             hp -= 1;
-            print("scratch");
+        }
+        else if (other.gameObject.tag == "potion")
+        {
+            if (hp == max_hp)
+            {
+                hp += 0;
+            }
+            else if (hp == max_hp - 1)
+            {
+                hp += 1;
+            }
+            else if (hp == max_hp - 2)
+            {
+                hp += 2;
+            }
+            else
+            {
+                hp += 3;
+            }
+            Destroy(Potion);
         }
     }
 

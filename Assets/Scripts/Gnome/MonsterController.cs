@@ -14,7 +14,7 @@ public class MonsterController : MonoBehaviour
     private bool isChasing1 = false;
     private bool isChasing2 = false;
     public Vector3 originalPosition;
-    public float attackCooldown = 2f;
+    public float attackCooldown;
     private float lastAttackTime;
     public Animator monAnimator;
     public GameObject monHP;
@@ -65,24 +65,6 @@ public class MonsterController : MonoBehaviour
             isChasing2 = false;
         }
 
-        // float originalToMonster = Vector2.Distance(originalPosition,transform.position);
-        // if(originalToMonster<=5)
-        // {
-        //      if (distanceToPlayer <= detectionRange)
-        //     {
-        //         isChasing1 = true;
-        //     }
-        //     else
-        //     {
-        //         isChasing1 = false;
-        //     }
-        //     print("22");
-        // }
-        // else if(originalToMonster>=6)
-        // {
-        //     isChasing1 = false;
-        //     print("11");
-        // }
         if (isChasing1)
         {
             // 根據面朝方向設定速度
@@ -102,6 +84,7 @@ public class MonsterController : MonoBehaviour
                 GetComponent<SpriteRenderer>().flipX = false;
             }
             AttackPlayer();
+        
             transform.Translate(Vector3.right * moveDirection * speed * Time.deltaTime);// 移動怪物
         }
         else if (isChasing2)
@@ -152,7 +135,6 @@ public class MonsterController : MonoBehaviour
         if (Time.time - lastAttackTime > attackCooldown)
         {
             monAnimator.SetInteger("Chase", 1);// 執行攻擊邏輯，這裡你可以添加傷害等具體操作
-            // 更新上一次攻擊時間
             lastAttackTime = Time.time;
         }
         else
@@ -167,5 +149,4 @@ public class MonsterController : MonoBehaviour
             hp -= 1;
         }
     }
-
 }

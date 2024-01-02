@@ -21,10 +21,18 @@ public class GameManager : MonoBehaviour
     {
         KlayController targetScript = FindObjectOfType<KlayController>();
         hp = targetScript.hp;
+        
+
+        if (hp <= 0)
+        {
+               print("game over");
+            StartCoroutine(WaitForAnimation());
+        }
         BennoController targetScript2 = FindObjectOfType<BennoController>();
         hp2 = targetScript2.hp;
-        if (hp <= 0 || hp2 <= 0)
+        if (hp2 <= 0)
         {
+             print("game over");
             StartCoroutine(WaitForAnimation());
         }
         if (Input.GetKeyDown(KeyCode.Escape))

@@ -21,11 +21,13 @@ public class BennoController : MonoBehaviour
     public GameObject playerHP;//Kevin Add HP
     public float hp = 10f;
     public float max_hp;
+    private AudioSource myAudioSource;
+    public AudioClip deadaudio=null;
 
     void Start()
     {
         hp = max_hp;
-        
+        myAudioSource= GetComponent<AudioSource>();
     }
     private void Awake()
     {
@@ -98,6 +100,12 @@ public class BennoController : MonoBehaviour
     private void BennoIsDead(){
         inputControl.Disable();
         playerHP.SetActive(false);
+                if (myAudioSource == null)
+        {
+            myAudioSource = gameObject.AddComponent<AudioSource>();
+        }
+        myAudioSource.clip = deadaudio;
+        myAudioSource.Play();
     }
     private void OnTriggerEnter2D(Collider2D other) {
         if (other.gameObject.CompareTag("scratch"))

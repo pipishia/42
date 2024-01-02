@@ -9,14 +9,14 @@ public class Charger : MonoBehaviour
   float battery = 0f;
   float max_battery = 3f;
   public float increaseAmount;
-  [SerializeField]GameObject door;
+  public GameObject door;
   
-  
+  public bool gateIsOpen = false;
 
   private void OnCollisionEnter2D(Collision2D collision)
   {
     GameObject beamObject = GameObject.FindGameObjectWithTag("Beam");
-    if (collision.gameObject.tag == "Beam")
+    if (collision.gameObject.CompareTag("Beam"))
     {
       Debug.Log("hit");
       ChargeUp();
@@ -35,7 +35,7 @@ public class Charger : MonoBehaviour
     UpdateCharger(battery, max_battery);
 
     if (battery>=max_battery){
-      door.SetActive(false); 
+      gateIsOpen = true;
     }
   }
 

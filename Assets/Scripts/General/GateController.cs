@@ -3,35 +3,60 @@ using UnityEngine;
 
 public class GateController : MonoBehaviour
 {
+    public GameObject cameraManager;
+    public GameObject Charger;
     private Animator animator;
-    public GameObject Gate;
+    //public GameObject Gate;
     public AudioClip passaudio;
-     private AudioSource myAudioSource;
+    private AudioSource myAudioSource;
 
     void Start()
     {
         // 获取Animator组件
         animator = GetComponent<Animator>();
-        myAudioSource= GetComponent<AudioSource>();
+        myAudioSource = GetComponent<AudioSource>();
     }
-    void OnCollisionEnter2D(Collision2D other)
+    void Update()
     {
-        if (other.gameObject.tag == "Player")
+        if (Charger.GetComponent<Charger>().gateIsOpen)
         {
-            animator.SetInteger("close", 1);
+            GateOpen();
+        }
 
-            StartCoroutine(WaitForAnimation());
-                     if (myAudioSource == null)
+    }
+    // void OnCollisionEnter2D(Collision2D other)
+    // {
+    //     if (other.gameObject.CompareTag("Player"))
+    //     {
+    //         animator.SetInteger("close", 1);
+
+    //         StartCoroutine(WaitForAnimation());
+    //         if (myAudioSource == null)
+    //         {
+    //             myAudioSource = gameObject.AddComponent<AudioSource>();
+    //         }
+    //         myAudioSource.clip = passaudio;
+    //         myAudioSource.Play();
+    //     }
+    // }
+    void GateOpen()
+    {
+        cameraManager.GetComponent<CameraController>().SwitchToGate();
+        animator.SetInteger("close", 1);
+
+        StartCoroutine(WaitForAnimation());
+        if (myAudioSource == null)
         {
             myAudioSource = gameObject.AddComponent<AudioSource>();
         }
         myAudioSource.clip = passaudio;
         myAudioSource.Play();
-        }
     }
     IEnumerator WaitForAnimation()
     {
-        yield return new WaitForSeconds(0.6f);
-        Destroy(Gate);
+
+        yield return new WaitForSeconds(2f);
+        cameraManager.GetComponent<CameraController>().SwitchToBenno();
+        Destroy(gameObject);
     }
 }

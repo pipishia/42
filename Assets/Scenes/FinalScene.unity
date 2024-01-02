@@ -1390,6 +1390,7 @@ MonoBehaviour:
   slider: {fileID: 1493730981}
   increaseAmount: 0.5
   door: {fileID: 1826307323}
+  gateIsOpen: 0
 --- !u!1 &298025618
 GameObject:
   m_ObjectHideFlags: 0
@@ -4887,7 +4888,7 @@ MonoBehaviour:
   hp: 5
   max_hp: 10
   takeDamageAmount: 1
-  isDie: 0
+  isDie: 1
   isAttack: 0
   attackTimer: 0
   attackCD: 0.2
@@ -6784,6 +6785,7 @@ MonoBehaviour:
   playerHP: {fileID: 408812610}
   hp: 10
   max_hp: 5
+  deadaudio: {fileID: 8300000, guid: c456e097cb8394f47a19b187637d0f97, type: 3}
 --- !u!114 &825251449
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11198,6 +11200,7 @@ MonoBehaviour:
   cameraMy: {fileID: 2093371325}
   benno: {fileID: 825251442}
   klay: {fileID: 598895909}
+  Gate: {fileID: 1826307323}
 --- !u!4 &1609266390
 Transform:
   m_ObjectHideFlags: 0
@@ -11899,7 +11902,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c6e2a47f0d06b54787798e48fa6b4db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Gate: {fileID: 1826307323}
+  cameraManager: {fileID: 1609266388}
+  Charger: {fileID: 287197964}
   passaudio: {fileID: 8300000, guid: 24ce1993f7232494bbeda6efc32fd95d, type: 3}
 --- !u!61 &1826307325
 BoxCollider2D:

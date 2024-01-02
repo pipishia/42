@@ -29,6 +29,9 @@ public class KlayController : MonoBehaviour
     public float max_hp;
     public int takeDamageAmount;
     public bool isDie;
+    public bool isAttack;
+    public float attackTimer;
+    public float attackCD;
 
     public int potionHeal;
     public GameObject Potion;
@@ -43,6 +46,7 @@ public class KlayController : MonoBehaviour
     {
         hp = max_hp;
         jumpTimer = jumpCD;
+        attackTimer = attackCD;
         switchPlayer.SetActive(false);
         isDie = false;
     }
@@ -55,9 +59,12 @@ public class KlayController : MonoBehaviour
 
         inputControl.Player.Jump.started += Jump;
         inputControl.Player.Switch.started += Switch;
+        inputControl.Player.Attack.started += KlayAttack;
+        //nputControl.Player.Attack.canceled += KlayAttackEnd;
 
     }
 
+    
     private void OnEnable()
     {
         inputControl.Enable();
@@ -71,11 +78,6 @@ public class KlayController : MonoBehaviour
     void Update()
     {
         inputDirection = inputControl.Player.Move.ReadValue<Vector2>();
-        if (hp <= 0)
-        {
-            //Destroy(gameObject);
-
-        }
         float _percent = hp / max_hp;
         playerHP.transform.localScale = new Vector3(_percent, playerHP.transform.localScale.y, playerHP.transform.localScale.z);
     }
@@ -84,7 +86,21 @@ public class KlayController : MonoBehaviour
     {
         Move();
         jumpTimer -= Time.deltaTime;
+        attackTimer -= Time.deltaTime;
     }
+    private void KlayAttack(InputAction.CallbackContext context)
+    {
+
+        if (attackTimer <= 0)
+        {
+            isAttack = true;
+            attackTimer = attackCD;
+        }
+    }
+    // private void KlayAttackEnd(InputAction.CallbackContext context)
+    // {
+    //     isAttack = false;
+    // }
 
     private void Move()
     {

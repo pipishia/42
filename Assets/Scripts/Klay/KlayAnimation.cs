@@ -29,5 +29,6 @@ public class KlayAnimation : MonoBehaviour
         anim.SetBool("isGround",physicsCheck.isGround);
         anim.SetBool("isWall",physicsCheck.isWall);
         anim.SetBool("isDie",klayController.isDie);
+        anim.SetBool("isAttack",klayController.isAttack);
     }
 }

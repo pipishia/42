@@ -12,6 +12,7 @@ public class DualPlatformController : MonoBehaviour
     private float originalYSecond;
     private float targetYOpposite;
     private float targetYSecond;
+    public float height;
     private Transform playerDefTransform;
     private Coroutine moveOppositeCoroutine;
     private Coroutine moveSecondCoroutine;
@@ -23,14 +24,8 @@ public class DualPlatformController : MonoBehaviour
         originalYSecond = secondPlatform.transform.position.y;
         targetYOpposite = originalYOpposite;
         targetYSecond = originalYSecond;
-        playerDefTransform = GameObject.FindGameObjectWithTag("hit").transform.parent;
+        playerDefTransform = GameObject.FindGameObjectWithTag("Player").transform.parent;
     }
-
-    void Update()
-    {
-
-    }
-
     
     void OnCollisionEnter2D(Collision2D other)
     {
@@ -39,14 +34,14 @@ public class DualPlatformController : MonoBehaviour
             
             if (controlledPlatform.position.x<85)
             {
-                targetYOpposite = originalYOpposite + 10f;
-                targetYSecond = originalYSecond - 10f;
+                targetYOpposite = originalYOpposite + height;
+                targetYSecond = originalYSecond - height;
 
             }
             else if(controlledPlatform.position.x>85)
             {
-                targetYOpposite = originalYOpposite - 10f;
-                targetYSecond = originalYSecond + 10f;
+                targetYOpposite = originalYOpposite - height;
+                targetYSecond = originalYSecond + height;
 
             }
             if (moveOppositeCoroutine != null)
@@ -84,7 +79,7 @@ public class DualPlatformController : MonoBehaviour
     {
         float elapsedTime = 0f;
         Vector3 initialPosition = platform.position;
-        Vector3 targetPosition = new Vector3(platform.position.x, targetY, platform.position.z);
+        Vector3 targetPosition = new(platform.position.x, targetY, platform.position.z);
 
         while (elapsedTime < moveSpeed)
         {

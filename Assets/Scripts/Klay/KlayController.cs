@@ -35,6 +35,11 @@ public class KlayController : MonoBehaviour
 
     public int potionHeal;
     public GameObject Potion;
+    public GameObject switchaudio=null;
+    public GameObject jumpaudio=null;
+    public GameObject deadaudio=null;
+    public GameObject pickupaudio=null;
+    public GameObject hurtaudio=null;
 
 
     void Start()
@@ -121,7 +126,10 @@ public class KlayController : MonoBehaviour
                 rb.AddForce(transform.up * jumpForce, ForceMode2D.Impulse);
                 jumpTimer = jumpCD;
             }
+        if (jumpaudio != null)
+        Instantiate (jumpaudio, Vector2.zero, Quaternion.identity);
         }
+        
     }
 
     private void Switch(InputAction.CallbackContext context)
@@ -132,22 +140,29 @@ public class KlayController : MonoBehaviour
 
         inputControl.Disable();
         cameraManager.GetComponent<CameraController>().SwitchToBenno();
+        if (switchaudio != null)
+        Instantiate (switchaudio, Vector2.zero, Quaternion.identity);
 
-    }
+    }  
 
     private void KlayIsDead()
     {
         inputControl.Disable();
         playerHP.SetActive(false);
         isDie = true;
+         if (deadaudio != null)
+        Instantiate (deadaudio, Vector2.zero, Quaternion.identity);
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("scratch"))
             hp -= takeDamageAmount;
+            if (hurtaudio != null)
+            Instantiate (hurtaudio, Vector2.zero, Quaternion.identity);
         if (hp <= 0)
         {
             KlayIsDead();
+            
         }
     }
 
@@ -160,6 +175,8 @@ public class KlayController : MonoBehaviour
             if (hp >= max_hp)
                 hp = max_hp;
             Destroy(Potion);
+            if (pickupaudio != null)
+            Instantiate (pickupaudio, Vector2.zero, Quaternion.identity);
         }
 
     }

@@ -6,34 +6,29 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.PlayerLoop;
 
-public class KlayController : MonoBehaviour
+public class BennoController : MonoBehaviour
 {
     public GameObject cameraManager;
-    public GameObject switchPlayer;
-    private Vector2 nowPos;
-    public KlayInputControl inputControl;
+    public GameObject switchPlayer;   
+    public BennoInputControl inputControl;
     public Vector2 inputDirection;
     private Rigidbody2D rb;
     private PhysicsCheck physicsCheck;
     private SpriteRenderer sr;
     [Header("Basic parameter")]
-    //public float defSpeed;
     public float speed;
-    //public float defJumpForce;
- 
     public float jumpForce;
-    public GameObject playerHP;//梁家祥加HP
+    public GameObject playerHP;//Kevin Add HP
     float hp = 10f;
     public float max_hp;
 
     void Start()
     {
         hp = max_hp;
-        switchPlayer.SetActive(false);
     }
     private void Awake()
     {
-        inputControl = new KlayInputControl();
+        inputControl = new BennoInputControl();
         rb = GetComponent<Rigidbody2D>();
         physicsCheck = GetComponent<PhysicsCheck>();
         sr = GetComponent<SpriteRenderer>();
@@ -88,22 +83,20 @@ public class KlayController : MonoBehaviour
     {
         if (physicsCheck.isGround || physicsCheck.isWall)
         {
-            Debug.Log("jump pressed");
+            print("jump pressed");
             rb.AddForce(transform.up * jumpForce, ForceMode2D.Impulse);
         }
     }
 
-    private void Switch(InputAction.CallbackContext context)
+   public void Switch(InputAction.CallbackContext context)
     {
-        nowPos = rb.position;
-        switchPlayer.transform.position = (Vector3)nowPos;
-        switchPlayer.SetActive(true);
-        
-        inputControl.Disable();
-        cameraManager.GetComponent<CameraController>().SwitchToBenno();
-        
+        //switchPlayer.SetActive(true);
+        //new KlayInputControl input = switchPlayer.GetComponents<KlayInputControl>();
+        print("Benno Switch");
+        switchPlayer.GetComponent<KlayController>().inputControl.Enable();
+        gameObject.SetActive(false);     
+        cameraManager.GetComponent<CameraController>().SwitchToklay();   
     }
-
     private void OnTriggerEnter2D(Collider2D other) {
         if (other.gameObject.CompareTag("scratch"))
         {
@@ -111,5 +104,4 @@ public class KlayController : MonoBehaviour
             print("scratch");
         }
     }
-
 }

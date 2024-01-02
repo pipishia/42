@@ -8,6 +8,9 @@ TagManager:
   - hit
   - monattack
   - potion
+  - Beam
+  - Firepoint
+  - Bounds
   layers:
   - Default
   - TransparentFX

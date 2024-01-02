@@ -4248,6 +4248,11 @@ MonoBehaviour:
   attackCD: 0.2
   potionHeal: 3
   Potion: {fileID: 107644608}
+  switchaudio: {fileID: 0}
+  jumpaudio: {fileID: 0}
+  deadaudio: {fileID: 0}
+  pickupaudio: {fileID: 0}
+  hurtaudio: {fileID: 0}
 --- !u!70 &598895916
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -5260,7 +5265,7 @@ RectTransform:
   m_Children:
   - {fileID: 1465052410}
   - {fileID: 1203174671}
-  m_Father: {fileID: 2093371326}
+  m_Father: {fileID: 1367225605}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -7806,7 +7811,7 @@ RectTransform:
   - {fileID: 1977351317}
   - {fileID: 983369196}
   - {fileID: 870726210}
-  m_Father: {fileID: 2093371326}
+  m_Father: {fileID: 1367225605}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -7937,15 +7942,14 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 66, y: -23.9}
-      - {x: 85.90039, y: -24}
-      - {x: 115, y: -22.8}
+    - - {x: 47.677383, y: -5}
+      - {x: 70, y: -18}
+      - {x: 115, y: -18}
       - {x: 115, y: 32}
       - {x: 83, y: 32}
       - {x: 20, y: 21.2}
       - {x: -17, y: 21}
-      - {x: -17, y: -15.3}
-      - {x: 48, y: -14.65}
+      - {x: -17, y: -5}
   m_UseDelaunayMesh: 0
 --- !u!4 &1256351832
 Transform:
@@ -8510,7 +8514,9 @@ Transform:
   m_LocalPosition: {x: 65.993, y: 19.958, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
-  m_Children: []
+  m_Children:
+  - {fileID: 774909104}
+  - {fileID: 1248342803}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1425983464
@@ -70121,6 +70127,7 @@ GameObject:
   - component: {fileID: 2093371326}
   - component: {fileID: 2093371325}
   - component: {fileID: 2093371324}
+  - component: {fileID: 2093371327}
   m_Layer: 0
   m_Name: Virtual Camera
   m_TagString: Untagged
@@ -70193,10 +70200,23 @@ Transform:
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1278074435}
-  - {fileID: 774909104}
-  - {fileID: 1248342803}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2093371327
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2093371322}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f453f694addf4275988fac205bc91968, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_BoundingShape2D: {fileID: 1256351831}
+  m_Damping: 0.5
+  m_MaxWindowSize: -1
 --- !u!1 &2112288736
 GameObject:
   m_ObjectHideFlags: 0

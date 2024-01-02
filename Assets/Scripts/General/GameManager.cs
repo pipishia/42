@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -17,7 +18,9 @@ public class GameManager : MonoBehaviour
     {
         KlayController targetScript = FindObjectOfType<KlayController>();
         hp = targetScript.hp;
-        DiePause();
+        if(hp<=0){
+            StartCoroutine(WaitForAnimation());
+        }
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             TogglePause();
@@ -44,10 +47,12 @@ public class GameManager : MonoBehaviour
     }
     public void DiePause()
     {
-        if (hp<=0)
-        {
             Time.timeScale = 0f; 
             Die.SetActive(true); 
-        }
+    }
+    IEnumerator WaitForAnimation()
+    {
+        yield return new WaitForSeconds(2.0f);
+        DiePause();
     }
 }

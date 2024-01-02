@@ -59375,7 +59375,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!70 &186741941
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -59464,6 +59464,7 @@ MonoBehaviour:
   hp: 0
   max_hp: 100
   takeDamageAmount: 0
+  gnomediedaudio: {fileID: 8300000, guid: 3e6704e617881454c81c1db6e537026b, type: 3}
 --- !u!95 &186741944
 Animator:
   serializedVersion: 5
@@ -60465,6 +60466,7 @@ MonoBehaviour:
   hp: 0
   max_hp: 100
   takeDamageAmount: 0
+  gnomediedaudio: {fileID: 0}
 --- !u!95 &347666963
 Animator:
   serializedVersion: 5
@@ -63391,8 +63393,17 @@ MonoBehaviour:
   max_hp: 10
   takeDamageAmount: 0
   isDie: 0
+  isAttack: 0
+  attackTimer: 0
+  attackCD: 0
   potionHeal: 0
   Potion: {fileID: 2035760924}
+  switchaudio: {fileID: 8300000, guid: ea800a9f8034c7b46a8b1081b200e781, type: 3}
+  jumpaudio: {fileID: 8300000, guid: 26b043130b19c0440917b2e68b28e8e6, type: 3}
+  deadaudio: {fileID: 8300000, guid: c456e097cb8394f47a19b187637d0f97, type: 3}
+  pickupaudio: {fileID: 8300000, guid: aa15b03a57ef602468c9e259479e64b0, type: 3}
+  hurtaudio: {fileID: 8300000, guid: 2a3ddb2bf7d9590488b2d01d937cc5fd, type: 3}
+  hitaudio: {fileID: 8300000, guid: 2a5caefe193e58d43a03038f7d94f8e8, type: 3}
 --- !u!70 &696326106
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -64046,6 +64057,7 @@ MonoBehaviour:
   secondPlatform: {fileID: 813545117}
   oppositePlatform: {fileID: 847647790}
   moveSpeed: 5
+  height: 0
 --- !u!61 &813545115
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -64389,6 +64401,7 @@ MonoBehaviour:
   secondPlatform: {fileID: 813545117}
   oppositePlatform: {fileID: 847647790}
   moveSpeed: 30
+  height: 0
 --- !u!61 &847647788
 BoxCollider2D:
   m_ObjectHideFlags: 0

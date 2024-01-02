@@ -793,7 +793,6 @@ GameObject:
   - component: {fileID: 263993162}
   - component: {fileID: 263993161}
   - component: {fileID: 263993160}
-  - component: {fileID: 263993164}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -888,18 +887,6 @@ RectTransform:
   m_AnchoredPosition: {x: 47.284798, y: 23.222898}
   m_SizeDelta: {x: 249.48, y: 160.2726}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!225 &263993164
-CanvasGroup:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 263993159}
-  m_Enabled: 1
-  m_Alpha: 1
-  m_Interactable: 1
-  m_BlocksRaycasts: 1
-  m_IgnoreParentGroups: 0
 --- !u!1 &301036506
 GameObject:
   m_ObjectHideFlags: 0
@@ -65787,7 +65774,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pauseMenu: {fileID: 263993159}
-  darkOverlay: {fileID: 263993164}
+  Die: {fileID: 0}
+  hp: 0
 --- !u!4 &1500157590
 Transform:
   m_ObjectHideFlags: 0
@@ -66873,9 +66861,17 @@ MonoBehaviour:
   inputDirection: {x: 0, y: 0}
   speed: 400
   jumpForce: 410
+  jumpCD: 0
+  jumpTimer: 0
   playerHP: {fileID: 356060664}
   hp: 10
   max_hp: 100
+  takeDamageAmount: 0
+  isDie: 0
+  isAttack: 0
+  attackTimer: 0
+  attackCD: 0
+  potionHeal: 0
   Potion: {fileID: 1545465411}
 --- !u!70 &1911458928
 CapsuleCollider2D:
@@ -67255,7 +67251,10 @@ MonoBehaviour:
   attackCooldown: 0.07
   monAnimator: {fileID: 2011780366}
   monHP: {fileID: 1433923694}
+  Klay: {fileID: 0}
+  hp: 0
   max_hp: 100
+  takeDamageAmount: 0
 --- !u!95 &2011780366
 Animator:
   serializedVersion: 5

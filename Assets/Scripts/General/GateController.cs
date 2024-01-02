@@ -5,6 +5,7 @@ public class GateController : MonoBehaviour
 {
     private Animator animator;
     public GameObject Gate;
+    public AudioClip passaudio;
 
     void Start()
     {
@@ -18,6 +19,8 @@ public class GateController : MonoBehaviour
             animator.SetInteger("close", 1);
 
             StartCoroutine(WaitForAnimation());
+             if (passaudio != null)
+            Instantiate (passaudio, Vector2.zero, Quaternion.identity);
         }
     }
     IEnumerator WaitForAnimation()

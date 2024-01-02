@@ -22,6 +22,8 @@ public class MonsterController : MonoBehaviour
     [SerializeField] private float hp;
     public float max_hp;
     public float takeDamageAmount;
+    public AudioClip gnomediedaudio=null;
+
 
     void Start()
     {
@@ -42,7 +44,10 @@ public class MonsterController : MonoBehaviour
     {
         if (hp <= 0  || Klay.GetComponent<KlayController>().isDie )
         {
+            if (gnomediedaudio != null)
+            Instantiate (gnomediedaudio, Vector2.zero, Quaternion.identity);
             Destroy(gameObject);
+            
         }
         float _percent = hp / max_hp;
         monHP.transform.localScale = new Vector3(_percent, monHP.transform.localScale.y, monHP.transform.localScale.z);

@@ -35,11 +35,12 @@ public class KlayController : MonoBehaviour
 
     public int potionHeal;
     public GameObject Potion;
-    public GameObject switchaudio=null;
-    public GameObject jumpaudio=null;
-    public GameObject deadaudio=null;
-    public GameObject pickupaudio=null;
-    public GameObject hurtaudio=null;
+    public AudioClip switchaudio=null;
+    public AudioClip jumpaudio=null;
+    public AudioClip deadaudio=null;
+    public AudioClip pickupaudio=null;
+    public AudioClip hurtaudio=null;
+    public AudioClip hitaudio=null;
 
 
     void Start()
@@ -95,6 +96,8 @@ public class KlayController : MonoBehaviour
         {
             isAttack = true;
             attackTimer = attackCD;
+            if (hitaudio != null)
+            Instantiate (hitaudio, Vector2.zero, Quaternion.identity);
         }
     }
     // private void KlayAttackEnd(InputAction.CallbackContext context)

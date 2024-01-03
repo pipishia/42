@@ -19,6 +19,10 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            TogglePause();
+        }
         KlayController targetScript = FindObjectOfType<KlayController>();
         hp = targetScript.hp;
         
@@ -35,10 +39,7 @@ public class GameManager : MonoBehaviour
              print("game over");
             StartCoroutine(WaitForAnimation());
         }
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            TogglePause();
-        }
+        
 
     }
 
